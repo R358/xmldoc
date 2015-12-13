@@ -27,3 +27,15 @@ func (xd *XDBaseNode) AddChild(n XDNode) {
 func (xd *XDBaseNode) GetName() XDName {
 	return xd.XDName
 }
+
+// TraverseChildren calling the function onChild, if onChild returns false
+// traversal is stopped.
+func (xd *XDBaseNode) TraverseChildren(onChild func(XDNode)bool) {
+	if xd.Children != nil {
+		for _,v := range xd.Children {
+			if onChild(v) {
+				break
+			}
+		}
+	}
+}
