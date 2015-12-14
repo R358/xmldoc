@@ -14,3 +14,13 @@ type XDElement struct {
 	*XDBaseNode
 	Attributes map[XDName]string
 }
+
+// TraverseAttributes traverses the attributes passing each one to the supplied function
+// traversal stops if the function returns true.
+func (ele *XDElement) TraverseAttributes(onAttribute func(XDName, string) bool) {
+	for n, v := range ele.Attributes {
+		if onAttribute(n, v) {
+			break
+		}
+	}
+}
