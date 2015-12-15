@@ -18,7 +18,7 @@ func (xd *XDBaseNode) GetParent() XDNode {
 	return xd.Parent
 }
 
-// AddChild return the child of the node.
+// AddChild add a child node.
 func (xd *XDBaseNode) AddChild(n XDNode) {
 	xd.Children = append(xd.Children, n)
 }
