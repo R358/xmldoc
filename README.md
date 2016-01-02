@@ -3,7 +3,7 @@
 Xmldoc provides a simple xml document model. Such models can be used for contextual processing of xml documents. Xmldoc is not intended to be a replacement for other Golang based xml deserialisation APIs. The model that is generated is 100% mutable so you will need be careful sharing between go routines.
 
 ```bash
-go get -u github.com/ballpein/xmldoc
+go get -u github.com/R358/xmldoc
 ```
 
 ##Usage
