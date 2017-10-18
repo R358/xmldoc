@@ -2,7 +2,6 @@ package xmldoc
 
 import (
 	"bytes"
-	"io"
 	"testing"
 )
 
@@ -11,7 +10,7 @@ func Test_Parse_SingleElement(t *testing.T) {
 
 	doc, e := Parse(bytes.NewBufferString(xml))
 
-	if e != nil && e != io.EOF {
+	if e != nil {
 		t.Error("Unexpected error: ", e.Error())
 	}
 
@@ -38,7 +37,7 @@ func Test_Parse_SingleElement_Attributes(t *testing.T) {
 
 	doc, e := Parse(bytes.NewBufferString(xml))
 
-	if e != nil && e != io.EOF {
+	if e != nil {
 		t.Error("Unexpected error: ", e.Error())
 	}
 
@@ -74,7 +73,7 @@ func Test_Parse_SingleElement_CData(t *testing.T) {
 
 	doc, e := Parse(bytes.NewBufferString(xml))
 
-	if e != nil && e != io.EOF {
+	if e != nil {
 		t.Error("Unexpected error: ", e.Error())
 	}
 
@@ -111,7 +110,7 @@ func Test_Parse_SingleElement_Comment(t *testing.T) {
 
 	doc, e := Parse(bytes.NewBufferString(xml))
 
-	if e != nil && e != io.EOF {
+	if e != nil {
 		t.Error("Unexpected error: ", e.Error())
 	}
 
@@ -147,7 +146,7 @@ func Test_Parse_SingleElement_Directivet(t *testing.T) {
 
 	doc, e := Parse(bytes.NewBufferString(xml))
 
-	if e != nil && e != io.EOF {
+	if e != nil {
 		t.Error("Unexpected error: ", e.Error())
 	}
 

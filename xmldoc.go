@@ -31,13 +31,13 @@ func Parse(r io.Reader) (doc *XDCDocument, err error) {
 	doc = NewXDCDocument()
 	parser := xml.NewDecoder(r)
 	var token xml.Token
-
 	var parent XDNode = doc
+	openElements := 0
 
 	for token, err = parser.Token(); err == nil && token != nil; token, err = parser.Token() {
-
 		switch tl := token.(type) {
 		case xml.StartElement:
+			openElements++
 			j := NewXDElement(XDName{LocalName: tl.Name.Local, NameSpace: tl.Name.Space})
 
 			if tl.Attr != nil {
@@ -54,6 +54,7 @@ func Parse(r io.Reader) (doc *XDCDocument, err error) {
 			break
 
 		case xml.EndElement:
+			openElements--
 			parent = parent.GetParent()
 			break
 
@@ -77,6 +78,15 @@ func Parse(r io.Reader) (doc *XDCDocument, err error) {
 			dir.Parent = parent
 			parent.AddChild(dir)
 		}
+	}
+
+	//
+	// We get an EOF because we optimistically try to fetch the next token.
+	// We will nullify the error we have no open elements and assume
+	// we have legitimately read to the end of the document.
+	//
+	if openElements == 0 && err == io.EOF {
+		err = nil
 	}
 
 	return doc, err
